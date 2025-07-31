@@ -1,6 +1,12 @@
+from game_result import GameResult
+
 class Game:
-    def guess(self, guess_number):
+    def __init__(self):
+        self._question = ''
+
+    def guess(self, guess_number) -> GameResult:
         self._assert_illegal_value(guess_number)
+        return GameResult(True, 3, 0)
 
     def _is_duplicate_method(self, guess_number):
         return len(set(guess_number)) != 3
