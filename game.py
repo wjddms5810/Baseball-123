@@ -13,23 +13,22 @@ class Game:
     def question(self, value):
         self._question = value
 
-    def _count_strike(self, quess_number):
-        cnt = 0
+    def _count_strike_and_ball(self, quess_number):
+        strike_cnt = 0
+        ball_cnt = 0
         for i in range(0, 3):
             if quess_number[i] == self._question[i]:
-                cnt +=1
-        return cnt
+                strike_cnt +=1
+            elif quess_number[i] in  self._question[i]:
+                ball_cnt +=1
+        return strike_cnt, ball_cnt
 
     def guess(self, guess_number) -> GameResult | None:
         self._assert_illegal_value(guess_number)
         if guess_number == self._question:
             return GameResult(True, 3, 0)
-        strike_cnt = self._count_strike(guess_number)
-        if  strike_cnt> 0:
-            return GameResult(False, strike_cnt, 0)
-
-
-        return GameResult(False, 0, 0)
+        strike_cnt, ball_cnt = self._count_strike_and_ball(guess_number)
+        return GameResult(False, strike_cnt,ball_cnt)
 
     def _is_duplicate_method(self, guess_number):
         return len(set(guess_number)) != 3
