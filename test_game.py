@@ -42,5 +42,6 @@ def test_return_solved_result_if_unmatched_number(game):
 
 def test_return_solved_result_if_2strike_0Ball(game):
     game.question = '123'
-    assert_matched_number(game.guess('143'), True, 2, 0)
+    assert_matched_number(game.guess('143'), False, 2, 0)
+
 

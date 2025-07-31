@@ -13,14 +13,21 @@ class Game:
     def question(self, value):
         self._question = value
 
+    def _count_strike(self, quess_number):
+        cnt = 0
+        for i in range(0, 3):
+            if quess_number[i] == self._question[i]:
+                cnt +=1
+        return cnt
+
     def guess(self, guess_number) -> GameResult | None:
         self._assert_illegal_value(guess_number)
         if guess_number == self._question:
             return GameResult(True, 3, 0)
-        if guess_number[0] == self._question[0] and \
-                guess_number[1] != self._question[1] and \
-                guess_number[2] == self._question[2]:
-            return GameResult(True, 2, 0)
+        strike_cnt = self._count_strike(guess_number)
+        if  strike_cnt> 0:
+            return GameResult(False, strike_cnt, 0)
+
 
         return GameResult(False, 0, 0)
 
