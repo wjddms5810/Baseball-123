@@ -19,7 +19,7 @@ class Game:
         for i in range(0, 3):
             if quess_number[i] == self._question[i]:
                 strike_cnt += 1
-            elif quess_number[i] in self._question[i]:
+            elif quess_number[i] in self._question:
                 ball_cnt += 1
         return strike_cnt, ball_cnt
 
